@@ -36,6 +36,7 @@ switch ($acao){
         $cat->inserir($categoriaNova);
         exit;
     case 'atualizar':
+        //mostrar o form preenchido
         //pega o ID enviado
         $id = $_GET['id'];
         //instancia o controlador
@@ -53,18 +54,11 @@ switch ($acao){
         $cat->gravaAtualizar($categoriaNova);
         exit;
     case 'excluir':
-        //pega o ID enviado
         $id = $_GET['id'];
-        //instancia o controlador
         $cat = new CategoriaController();
         //chama o método
         $cat->excluir($id);
-        exit;
-    case 'confExcluir':
-        $categoriaNova = new Categoria();
-        $categoriaNova->setId($_POST['id']);
-        $cat = new CategoriaController();
-        $cat->confExcluir($categoriaNova);
+
         exit;
     default:
         echo "Ação inválida";
