@@ -1,4 +1,5 @@
 <?php
+
 //altera o cabecalho HTTP para dizer que o conteúdo é JSON
 header('Content-type:application/json');
 

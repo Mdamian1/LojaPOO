@@ -87,7 +87,7 @@ class CategoriaDAO extends DAO
             $stmt = $this->conexao->prepare($sql);
             $stmt->bindParam(':valorid', $id);
             $stmt->execute();
-
+            return true;
         }catch (PDOException $e){
 
             throw new PDOException($e);

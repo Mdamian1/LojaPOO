@@ -1,17 +1,27 @@
 <?php
 
-require_once "../../model/Categoria.php";
-require_once "../../model/CategoriaDAO.php";
+header('Content-type:application/json');
+if($_SERVER['REQUEST_METHOD'] == 'PUT'){
 
-$dadosRecebidos = file_get_contents('php://input');
+    require_once "../../model/Categoria.php";
+    require_once "../../model/CategoriaDAO.php";
 
-$dados = json_decode($dadosRecebidos, true);
+    $dadosRecebidos = file_get_contents('php://input');
 
-$id = $dados['id'];
-$nome = $dados['nome'];
-$descricao = $dados['descricao'];
+    $dados = json_decode($dadosRecebidos, true);
 
-$categoria = new Categoria($nome, $descricao, $id);
-$catdao = new CategoriaDAO();
+    $id = $dados['id'];
+    $nome = $dados['nome'];
+    $descricao = $dados['descricao'];
 
-$catdao->update($categoria);
+    $categoria = new Categoria($nome, $descricao, $id);
+    $catdao = new CategoriaDAO();
+
+    if($catdao->update($categoria)){
+    echo json_encode(['msg'=>'Atualizado com sucesso']);
+    }else{
+        echo json_encode(['msg'=>'Não foi possível atualizar']);
+    }
+}else{
+    echo json_encode(['msg'=>'Metodo não suportado']);
+}
